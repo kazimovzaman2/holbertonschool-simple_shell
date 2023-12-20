@@ -9,4 +9,7 @@
 #include <sys/wait.h>
 
 
+char *readline(void);
+
+
 #endif

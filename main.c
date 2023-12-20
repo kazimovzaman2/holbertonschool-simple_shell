@@ -8,19 +8,18 @@
  */
 int main(void)
 {
-	size_t input_size = 0;
-	char *args;
+	char *line;
 
 	while (1)
 	{
 		printf("($) ");
 
-		if (getline(&args, &input_size, stdin) == -1)
+		line = readline();
+		if (!line)
 			break;
-
-		printf("%s", args);
+		printf("%s", line);
 	}
 
-	free(args);
+	free(line);
 	return (0);
 }
