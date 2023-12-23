@@ -8,6 +8,7 @@
  */
 int main(void)
 {
+	int i;
 	char *line;
 	char **args;
 
@@ -20,9 +21,11 @@ int main(void)
 		args = parse_line(line);
 		execute_command(args);
 
-		free(line);
+		for (i = 0; args[i] != NULL; i++)
+			free(args[i]);
 		free(args);
 	}
 
+	free(line);
 	return (0);
 }
