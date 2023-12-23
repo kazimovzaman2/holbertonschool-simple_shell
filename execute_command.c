@@ -6,7 +6,8 @@
  *
  * @args: Arguments as a null-terminated array.
  *
- * This function forks a process, executes the command, and waits for completion.
+ * This function forks a process, executes the command,
+ * and waits for completion.
  *
  * Return: No return value.
  */
