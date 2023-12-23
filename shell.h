@@ -10,6 +10,7 @@
 
 
 char *readline(void);
+char **parse_line(char *line, char **array);
 
 
 #endif
