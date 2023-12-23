@@ -1,13 +1,10 @@
 #include "shell.h"
 
 
-/*
+/**
  * execute_command - Execute a command in a new process.
  *
  * @args: Arguments as a null-terminated array.
- *
- * This function forks a process, executes the command,
- * and waits for completion.
  *
  * Return: No return value.
  */
