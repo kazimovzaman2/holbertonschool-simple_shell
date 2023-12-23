@@ -13,8 +13,6 @@ int main(void)
 
 	while (1)
 	{
-		printf("($) ");
-
 		line = readline();
 		if (!line)
 			break;
