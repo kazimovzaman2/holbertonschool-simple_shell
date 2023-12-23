@@ -1,5 +1,12 @@
 #include "shell.h"
 
+
+/*
+ * readline - Read a line of input from the standard input.
+ *
+ * Return: A pointer string containing the input line.
+ * 	   Returns NULL on failure or end-of-file.
+ */
 char *readline(void)
 {
 	char *line = NULL;

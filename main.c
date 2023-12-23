@@ -2,7 +2,7 @@
 
 
 /**
- * main - open source file
+ * main - Base functionality of shell.
  *
  * Return: Always 0.
  */
