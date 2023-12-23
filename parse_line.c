@@ -1,7 +1,7 @@
 #include "shell.h"
 
 
-/*
+/**
  * parse_line - Tokenize a string into an array of tokens.
  *
  * @line: The input string to be tokenized.
