@@ -10,7 +10,7 @@ int main(void)
 {
 	int i = 0;
 	char *line;
-	char *tokens[30];
+	char **tokens;
 
 	while (1)
 	{
@@ -20,12 +20,9 @@ int main(void)
 		if (!line)
 			break;
 
-		parse_line(line, tokens);
+		tokens = parse_line(line);
 		printf("%s", line);
 	}
-
-	for (i = 0; tokens[i] != NULL; i++)
-		free(tokens[i]);
 
 	free(line);
 	return (0);

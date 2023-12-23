@@ -1,27 +1,30 @@
 #include "shell.h"
 
 
-char **parse_line(char *line, char **array)
+char **parse_line(char *line)
 {
 	int token_count = 0;
-	char *token = strtok(line, " ");
+	char *token;
+	char **tokens = malloc(strlen(line) * sizeof(char *));
 
-	if (!line || !array)
+	if (!tokens)
 		return (NULL);
 
-	while (!token)
+	token = strtok(line, " ");
+
+	while (token)
 	{
-		array[token_count] = malloc(strlen(token) + 1);
-		strcpy(array[token_count], token);
+		tokens[token_count] = strdup(token);
+		if (!tokens[token_count])
+		{
+			fprintf(stderr, "Error happens.");
+			exit(EXIT_FAILURE);
+		}
 		token_count++;
-
-		if (token_count >= 30)
-			break;
-
 		token = strtok(NULL, " ");
 	}
 
-	array[token_count] = NULL;
+	tokens[token_count] = NULL;
 
-	return array;
+	return tokens;
 }
