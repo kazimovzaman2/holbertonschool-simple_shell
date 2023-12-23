@@ -16,7 +16,10 @@ int main(void)
 	{
 		line = readline();
 		if (!line)
+		{
+			free(line);
 			break;
+		}
 
 		args = parse_line(line);
 		if (!args[0])
