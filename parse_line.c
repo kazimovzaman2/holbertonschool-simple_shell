@@ -15,7 +15,7 @@ char **parse_line(char *line)
 {
 	int token_count = 0;
 	char *token;
-	char **tokens = malloc((strlen(line) + 1) * sizeof(char *));
+	char **tokens = malloc(strlen(line) * sizeof(char *));
 
 	if (!tokens)
 		return (NULL);
@@ -27,6 +27,7 @@ char **parse_line(char *line)
 		tokens[token_count] = strdup(token);
 		if (!tokens[token_count])
 		{
+			free(tokens[token_count]);
 			fprintf(stderr, "Error happens.");
 			exit(EXIT_FAILURE);
 		}
