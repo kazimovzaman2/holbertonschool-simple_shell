@@ -10,7 +10,7 @@ char **parse_line(char *line)
 	if (!tokens)
 		return (NULL);
 
-	token = strtok(line, " ");
+	token = strtok(line, " \n");
 
 	while (token)
 	{

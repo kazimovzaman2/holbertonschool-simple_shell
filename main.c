@@ -8,9 +8,8 @@
  */
 int main(void)
 {
-	int i = 0;
 	char *line;
-	char **tokens;
+	char **args;
 
 	while (1)
 	{
@@ -20,10 +19,12 @@ int main(void)
 		if (!line)
 			break;
 
-		tokens = parse_line(line);
-		printf("%s", line);
+		args = parse_line(line);
+		execute_command(args);
+
+		free(line);
+		free(args);
 	}
 
-	free(line);
 	return (0);
 }
