@@ -32,7 +32,7 @@ char **parse_line(char *line)
 			exit(EXIT_FAILURE);
 		}
 		token_count++;
-		token = strtok(NULL, " ");
+		token = strtok(NULL, " \n\t");
 	}
 
 	tokens[token_count] = NULL;
