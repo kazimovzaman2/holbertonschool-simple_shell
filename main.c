@@ -19,6 +19,11 @@ int main(void)
 			break;
 
 		args = parse_line(line);
+		if (!args[0])
+		{
+			free(args);
+			continue;
+		}
 		execute_command(args);
 
 		for (i = 0; args[i] != NULL; i++)
