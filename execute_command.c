@@ -21,7 +21,7 @@ void execute_command(char **args)
 	}
 	else if (child_pid == 0)
 	{
-		if (execve(args[0], args, NULL) == -1)
+		if (execvp(args[0], args) == -1)
 		{
 			perror("Error:");
 			exit(EXIT_FAILURE);
