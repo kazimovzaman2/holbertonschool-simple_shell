@@ -26,14 +26,15 @@ char **parse_line(char *line, char *delimiter)
 		tokens[token_count] = strdup(token);
 		if (!tokens[token_count])
 		{
-			free(tokens[token_count]);
-			fprintf(stderr, "Error happens.");
-			exit(EXIT_FAILURE);
+		  free(token);
+		  free(tokens[token_count]);
+		  fprintf(stderr, "Error happens.");
+		  exit(EXIT_FAILURE);
 		}
 		token_count++;
 		token = strtok(NULL, delimiter);
 	}
 	tokens[token_count] = NULL;
-	
+	free(token);
 	return (tokens);
 }

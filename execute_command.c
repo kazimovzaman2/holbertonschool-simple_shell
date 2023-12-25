@@ -14,9 +14,11 @@ void execute_command(char **args)
 	char *fullPath;
 	struct stat st;
 	char **pathArr;
- 	char *path = malloc(strlen(getenv("PATH")));
+ 	char *path = malloc(strlen(getenv("PATH")) * sizeof(char *));
  	strcpy(path, getenv("PATH"));
  	pathArr = parse_line(path, ":");
+	if (!path || !pathArr)
+	  perror("malloc");
  	free(path);
 
 	if (stat(args[0], &st) == 0)
@@ -44,32 +46,39 @@ void execute_command(char **args)
     }
 	if(!pathArr[i])
 	{
-	    i=0;
-	    while (pathArr[i])
-	    {
-	       free(pathArr[i]);
-	       i++;
-	    }
-	    free(pathArr);
-	    perror("Error");
+	  for (i = 0; pathArr[i]; i++)
+	    free(pathArr[i]);
+	  free(pathArr);
+	  perror("Error");
 	}
 	else
 	{
 	     if (child_pid == -1)
 	    {
 	        free(fullPath);
+		for (i = 0; pathArr[i]; i++)
+	            free(pathArr[i]);
+	        free(pathArr);
 		perror("fork");
 	    }
 	    else if (child_pid == 0)
 	    {
 		    if (execve(fullPath, args, NULL) == -1)
 		    {
-			perror("Error");
-			exit(EXIT_FAILURE);
+		      free(fullPath);
+		      for (i = 0; pathArr[i]; i++)
+	            free(pathArr[i]);
+	        free(pathArr);
+		      perror("Error");
+		      exit(EXIT_FAILURE);
 		    }
-		    free(fullPath);
 	    }
 	    else
 		    wait(&status);
+	     
+	     free(fullPath);
+	     for (i = 0; pathArr[i]; i++)
+	            free(pathArr[i]);
+	        free(pathArr);
 	}
-	}
+}
