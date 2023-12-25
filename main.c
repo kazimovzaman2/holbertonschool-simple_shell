@@ -1,6 +1,5 @@
 #include "shell.h"
 
-
 /**
  * main - Base functionality of shell.
  *
@@ -18,7 +17,7 @@ int main(void)
 		if (!line)
 			break;
 
-		args = parse_line(line);
+		args = parse_line(line, " \n\t");
 		free(line);
 		if (!args[0])
 		{

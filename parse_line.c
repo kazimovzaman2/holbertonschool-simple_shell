@@ -1,6 +1,5 @@
 #include "shell.h"
 
-
 /**
  * parse_line - Tokenize a string into an array of tokens.
  *
@@ -11,7 +10,7 @@
  *
  * Return: And array of tokens, with the last element is NULL.
  */
-char **parse_line(char *line)
+char **parse_line(char *line, char *delimiter)
 {
 	int token_count = 0;
 	char *token;
@@ -20,7 +19,7 @@ char **parse_line(char *line)
 	if (!tokens)
 		return (NULL);
 
-	token = strtok(line, " \n\t");
+	token = strtok(line, delimiter);
 
 	while (token)
 	{
@@ -32,10 +31,9 @@ char **parse_line(char *line)
 			exit(EXIT_FAILURE);
 		}
 		token_count++;
-		token = strtok(NULL, " \n\t");
+		token = strtok(NULL, delimiter);
 	}
-
 	tokens[token_count] = NULL;
-
+	
 	return (tokens);
 }

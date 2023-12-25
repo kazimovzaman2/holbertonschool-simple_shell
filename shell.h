@@ -8,10 +8,8 @@
 #include <sys/types.h>
 #include <sys/wait.h>
 
-
 char *readline(void);
-char **parse_line(char *line);
+char **parse_line(char *line, char *delimiter);
 void execute_command(char **args);
-
 
 #endif
