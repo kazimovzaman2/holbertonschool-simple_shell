@@ -1,4 +1,5 @@
 #include "shell.h"
+#include <errno.h>
 
 /**
  * execute_command - Execute a command in a new process.
@@ -49,7 +50,7 @@ void execute_command(char **args)
         for (i = 0; pathArr[i]; i++)
         free(pathArr[i]);
         free(pathArr);
-        perror("Error");
+        fprintf(stderr, "./hsh: 1: %s: not found", args[0]);
     }
     else
     {
