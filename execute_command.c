@@ -50,7 +50,7 @@ void execute_command(char **args)
         for (i = 0; pathArr[i]; i++)
         free(pathArr[i]);
         free(pathArr);
-        fprintf(stderr, "./hsh: 1: %s: not found", args[0]);
+        fprintf(stderr, "./hsh: 1: %s: not found\n", args[0]);
     }
     else
     {
@@ -64,7 +64,7 @@ void execute_command(char **args)
         }
         else if (child_pid == 0)
         {
-            if (execve(fullPath, args, NULL) == -1)
+            if (execvp(fullPath, args) == -1)
             {
                 free(fullPath);
                 for (i = 0; pathArr[i]; i++)
