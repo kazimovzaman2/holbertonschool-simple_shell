@@ -11,5 +11,9 @@
 
 extern char **environ;
 
+void process_user_input(char *user_input);
+char *_getpath(char *command);
+void execute_command(char *argv[], char *input);
+void print_env(void);
 
 #endif

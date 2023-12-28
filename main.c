@@ -8,7 +8,7 @@
 int main(void)
 {
     size_t input_len = 0;
-    size_t line = 0;
+    ssize_t line = 0;
     char *input = NULL;
 
 	while (1)
@@ -20,8 +20,10 @@ int main(void)
             exit(0);
         }
 
-        if (line > 0 && input[line - 1] == "\n")
+        if (line > 0 && input[line - 1] == '\n')
             input[line - 1] = '\0';
+
+       process_user_input(input); 
 	}
 
 	free(input);
