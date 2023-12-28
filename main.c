@@ -26,7 +26,7 @@ int main(void)
 			continue;
 		}
 
-		execute_command(args);
+		execute_command(args, line);
 
         for (i = 0; args[i] != NULL; i++)
             free(args[i]);

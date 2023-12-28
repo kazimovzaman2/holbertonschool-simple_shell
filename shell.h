@@ -11,7 +11,7 @@
 
 char *readline(void);
 char **parse_line(char *line);
-void execute_command(char **args);
+void execute_command(char **args, char *line);
 void free_args(char **args);
 
 

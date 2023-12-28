@@ -8,19 +8,23 @@
  *
  * Return: No return value.
  */
-void execute_command(char **args)
+void execute_command(char **args, char *line)
 {
 	pid_t child_pid;
 	int status;
+    int i;
 
     if (!args || !args[0])
         return;
 
     if (strcmp(args[0], "exit") == 0)
     {
+         for (i = 0; args[i] != NULL; i++)
+            free(args[i]);
         free(args);
+        free(line);
         exit(EXIT_SUCCESS);
-    } 
+    }
 
 	child_pid = fork();
 
@@ -32,12 +36,13 @@ void execute_command(char **args)
 	{
 		if (execvp(args[0], args) == -1)
 		{
-            fprintf(stderr, "./hsh: 1: %s: not found\n", args[0]);
-			exit(EXIT_FAILURE);
+			perror("Error");
+			exit(127);
 		}
 	}
 	else
 	{
+        /*wait(&status);*/
 		waitpid(child_pid, &status, 0);
 
         if (WIFEXITED(status))
