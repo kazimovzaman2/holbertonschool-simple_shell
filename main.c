@@ -7,7 +7,6 @@
  */
 int main(void)
 {
-	int i;
 	char *line;
 	char **args;
 
@@ -19,16 +18,16 @@ int main(void)
 
 		args = parse_line(line);
 		free(line);
+
 		if (!args[0])
 		{
 			free(args);
 			continue;
 		}
+
 		execute_command(args);
 
-		for (i = 0; args[i] != NULL; i++)
-			free(args[i]);
-		free(args);
+        free_args(args);
 	}
 
 	free(line);

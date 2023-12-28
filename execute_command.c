@@ -33,7 +33,7 @@ void execute_command(char **args)
 		if (execvp(args[0], args) == -1)
 		{
 			perror("Error:");
-			exit(2);
+			exit(EXIT_FAILURE);
 		}
 	}
 	else
