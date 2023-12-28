@@ -39,5 +39,12 @@ void execute_command(char **args)
 	else
 	{
 		waitpid(child_pid, &status, 0);
+
+        if (WIFEXITED(status))
+        {
+            int exit_status = WEXITSTATUS(status);
+            if (exit_status != 0)
+                exit(2);
+        }
 	}
 }
