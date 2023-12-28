@@ -7,25 +7,35 @@
  */
 int main(void)
 {
-    size_t input_len = 0;
-    ssize_t line = 0;
-    char *input = NULL;
+	int i;
+	char *line;
+	char **args;
 
 	while (1)
 	{
-		line = getline(&input, &input_len, stdin);
-		if (line == EOF)
-        {
-            free(input);
-            exit(0);
-        }
+		line = readline();
+		if (!line)
+			break;
+		if (strcmp(line, "exit") == 0)
+		{
+			free(line);
+			break;
+		}
 
-        if (line > 0 && input[line - 1] == '\n')
-            input[line - 1] = '\0';
+		args = parse_line(line, " \n\t");
+		free(line);
+		if (!args[0])
+		{
+			free(args);
+			continue;
+		}
+		execute_command(args);
 
-       process_user_input(input); 
+		for (i = 0; args[i] != NULL; i++)
+			free(args[i]);
+		free(args);
 	}
 
-	free(input);
+	free(line);
 	return (0);
 }
