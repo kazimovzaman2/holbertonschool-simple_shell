@@ -16,6 +16,8 @@ int main(void)
 		line = readline();
 		if (!line)
 			break;
+		if (strcmp(line, "exit"))
+			break;
 
 		args = parse_line(line, " \n\t");
 		free(line);
