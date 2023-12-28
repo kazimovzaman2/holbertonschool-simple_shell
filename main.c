@@ -7,6 +7,7 @@
  */
 int main(void)
 {
+    int i;
 	char *line;
 	char **args;
 
@@ -27,7 +28,9 @@ int main(void)
 
 		execute_command(args);
 
-        free_args(args);
+        for (i = 0; args[i] != NULL; i++)
+            free(args[i]);
+        free(args);
 	}
 
 	free(line);
