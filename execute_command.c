@@ -21,6 +21,17 @@ void execute_command(char **args)
         free(args);
         exit(EXIT_SUCCESS);
     }
+    else if (strcmp(args[0], "env") == 0)
+    {
+        char **env_var = environ;
+        while (*env_var != NULL)
+        {
+            printf("%s\n", *env_var);
+            env_var++;
+        }
+        free_args(args);
+        return;
+    }
 
 	child_pid = fork();
 
