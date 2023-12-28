@@ -64,7 +64,7 @@ void execute_command(char **args)
         }
         else if (child_pid == 0)
         {
-            if (execvp(fullPath, args) == -1)
+            if (execve(fullPath, args, NULL) == -1)
             {
                 free(fullPath);
                 for (i = 0; pathArr[i]; i++)
