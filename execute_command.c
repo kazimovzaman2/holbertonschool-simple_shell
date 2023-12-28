@@ -38,6 +38,6 @@ void execute_command(char **args)
 	}
 	else
 	{
-		wait(&status);
+		waitpid(child_pid, &status, 0);
 	}
 }
