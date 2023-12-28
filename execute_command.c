@@ -19,7 +19,7 @@ void execute_command(char **args)
     if (strcmp(args[0], "exit") == 0)
     {
         free(args);
-        exit(2);
+        exit(EXIT_SUCCESS);
     }
 
 	child_pid = fork();
