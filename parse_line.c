@@ -10,7 +10,7 @@
  *
  * Return: And array of tokens, with the last element is NULL.
  */
-char **parse_line(char *line, char *delimiter)
+char **parse_line(char *line)
 {
 	int token_count = 0;
 	char *token;
@@ -19,7 +19,7 @@ char **parse_line(char *line, char *delimiter)
 	if (!tokens)
 		return (NULL);
 
-	token = strtok(line, delimiter);
+	token = strtok(line, " \n\t");
 
 	while (token)
 	{
@@ -32,7 +32,7 @@ char **parse_line(char *line, char *delimiter)
 		  exit(EXIT_FAILURE);
 		}
 		token_count++;
-		token = strtok(NULL, delimiter);
+		token = strtok(NULL, " \n\t");
 	}
 	tokens[token_count] = NULL;
 	free(token);

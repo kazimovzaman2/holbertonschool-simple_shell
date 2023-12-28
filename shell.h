@@ -10,7 +10,7 @@
 #include <sys/stat.h>
 
 char *readline(void);
-char **parse_line(char *line, char *delimiter);
+char **parse_line(char *line);
 void execute_command(char **args);
 
 #endif
