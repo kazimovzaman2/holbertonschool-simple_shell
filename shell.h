@@ -9,10 +9,7 @@
 #include <sys/wait.h>
 #include <sys/stat.h>
 
-char *readline(void);
-char **parse_line(char *line);
-void execute_command(char **args);
-void free_args(char **args);
+extern char **environ;
 
 
 #endif
