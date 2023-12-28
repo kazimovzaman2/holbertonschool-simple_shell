@@ -11,15 +11,16 @@
 void execute_command(char **args)
 {
   pid_t child_pid;
-    int status, i = 0;
+  int status, flag = 0, i = 0;
     char *fullPath;
     struct stat st;
     char **pathArr;
     char *path = malloc(strlen(getenv("PATH")) * sizeof(char *));
-    if (!getenv("PATH"))
-        fprintf(stderr, "./hsh: 1: %s: not found\n", args[0]);
+
+
     
     strcpy(path, getenv("PATH"));
+
     pathArr = parse_line(path, ":");
 
     if (!path || !pathArr)
@@ -31,7 +32,9 @@ void execute_command(char **args)
     {
         fullPath = malloc(strlen(args[0]) * sizeof(char *));
         strcpy(fullPath, args[0]);
+	flag = 1;
         child_pid = fork();
+	printf("here 1");
     }
     else
     {
@@ -44,18 +47,20 @@ void execute_command(char **args)
             if (stat(fullPath, &st) == 0)
             {
                 child_pid = fork();
+		flag = 1;
                 break;
             }
             free(fullPath);
             i++;
         }
     }
-    if(!pathArr[i])
+    if(!flag)
     {
         for (i = 0; pathArr[i]; i++)
         free(pathArr[i]);
         free(pathArr);
-        fprintf(stderr, "./hsh: 1: %s: not found\n", args[0]);
+        fprintf(stderr, "./hsh: 1: %s: 2not found\n", args[0]);
+	return;
     }
     else
     {
@@ -69,7 +74,7 @@ void execute_command(char **args)
         }
         else if (child_pid == 0)
         {
-            if (execve(fullPath, args, NULL) == -1)
+            if (execve(fullPath, args, environ) == -1)
             {
                 free(fullPath);
                 for (i = 0; pathArr[i]; i++)
