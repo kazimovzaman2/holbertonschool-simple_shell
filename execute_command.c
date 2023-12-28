@@ -8,21 +8,17 @@
  *
  * Return: No return value.
  */
-void execute_command(char **args, char *line)
+void execute_command(char **args)
 {
 	pid_t child_pid;
 	int status;
-    int i;
 
     if (!args || !args[0])
         return;
 
     if (strcmp(args[0], "exit") == 0)
     {
-         for (i = 0; args[i] != NULL; i++)
-            free(args[i]);
         free(args);
-        free(line);
         exit(EXIT_SUCCESS);
     }
 
