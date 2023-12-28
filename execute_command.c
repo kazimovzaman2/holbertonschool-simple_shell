@@ -37,7 +37,6 @@ void execute_command(char **args, char *line)
 		if (execvp(args[0], args) == -1)
 		{
 			perror("Error");
-			exit(127);
 		}
 	}
 	else
@@ -49,7 +48,7 @@ void execute_command(char **args, char *line)
         {
             int exit_status = WEXITSTATUS(status);
             if (exit_status != 0)
-                exit(2);
+                exit(127);
         }
 	}
 }
