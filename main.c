@@ -19,6 +19,9 @@ int main(void)
             free(input);
             exit(0);
         }
+
+        if (line > 0 && input[line - 1] == "\n")
+            input[line - 1] = '\0';
 	}
 
 	free(input);
