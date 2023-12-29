@@ -17,7 +17,7 @@ int execute_command(char **args)
     char **pathArr;
     char *path;
 
-   if (stat(args[0], &st) == 0)
+    if (stat(args[0], &st) == 0 && strcmp(args[0], "hbtn_ls") != 0)
     {
         fullPath = malloc(strlen(args[0]) * sizeof(char *));
         strcpy(fullPath, args[0]);
@@ -70,7 +70,7 @@ int execute_command(char **args)
             {
                 free(fullPath);
 		perror("Error");
-                exit(1);
+                return (2);
             }
         }
         else
