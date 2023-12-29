@@ -74,8 +74,8 @@ int execute_command(char **args)
 	    }
         else
         {
-            wait(child_pid, &status, 0);
-            if (WIFEXITED(*status))
+            waitpid(child_pid, &status, 0);
+            if (WIFEXITED(status))
                 return (WEXITSTATUS(status));
         }
 
