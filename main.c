@@ -49,7 +49,7 @@ int main(void)
 	}
 
 	free(line);
-	if (turn == 127)
-	  exit(127);
+	if (turn)
+	  exit(turn);
 	return (0);
 }
