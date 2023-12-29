@@ -74,13 +74,9 @@ int execute_command(char **args)
 	    }
         else
         {
-            wait(&status);
-	    /*   free(fullPath);
-	    if (WIFEXITED(status))
-	      return (WEXITSTATUS(status));
-	    else if (WIFSIGNALED(status))
-	      return (127);
-	    */
+            wait(child_pid, &status, 0);
+            if (WIFEXITED(*status))
+                return (WEXITSTATUS(status));
         }
 
         free(fullPath);
