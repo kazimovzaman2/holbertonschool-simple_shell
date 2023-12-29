@@ -65,6 +65,8 @@ int runcommand(char *line)
             return (127);
         }
 	}
+
+    return (-1);
 }
 
 
