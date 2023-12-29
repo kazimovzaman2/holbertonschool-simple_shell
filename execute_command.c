@@ -66,11 +66,12 @@ int execute_command(char **args)
         }
         else if (child_pid == 0)
         {
-            execve(fullPath, args, environ
-            free(fullPath);
-	    perro(args[0]);
-            exit (1);
-                    }
+	  if (execve(fullPath, args, environ) == -1)
+	    {
+	      free(fullPath);
+            return (2);
+	    }
+	}
         else
 	  {
 	    wait(&status);
