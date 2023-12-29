@@ -20,7 +20,7 @@ int findpath(char *argument0, char *newpath)
 
 
 
-void runcommand(char *line)
+int runcommand(char *line)
 {
 	pid_t child_pid;
 	int i, status;
@@ -56,6 +56,7 @@ void runcommand(char *line)
 	else
 	{
 		wait(&status);
+        return WEXITSTATUS(status);
 	}
 }
 
@@ -68,6 +69,7 @@ int main(void)
 	ssize_t line_read;
 	int i;
     char *ptr;
+    int command_status = 0;
 
 	while (1)
 	{
@@ -105,8 +107,8 @@ int main(void)
 			}
 		}
 		else
-			runcommand(line);
+			command_status = runcommand(line);
 	}
 	free(line);
-	return (0);
+	return (command_status);
 }
