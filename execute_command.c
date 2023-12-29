@@ -69,17 +69,18 @@ int execute_command(char **args)
 	  if (execve(fullPath, args, environ) == -1)
 	    {
 	      free(fullPath);
-            return (2);
+              return (2);
 	    }
 	}
         else
 	  {
 	    wait(&status);
-	    free(fullPath);
+	    /*   free(fullPath);
 	    if (WIFEXITED(status))
 	      return (WEXITSTATUS(status));
 	    else if (WIFSIGNALED(status))
 	      return (127);
+	    */
 	  }
 
         free(fullPath);
