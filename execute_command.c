@@ -10,8 +10,8 @@
  */
 int execute_command(char **args)
 {
-  pid_t child_pid;
-  int status, flag = 0, i = 0;
+    pid_t child_pid;
+    int status, flag = 0, i = 0;
     char *fullPath;
     struct stat st;
     char **pathArr;
@@ -21,16 +21,16 @@ int execute_command(char **args)
     {
         fullPath = malloc(strlen(args[0]) * sizeof(char *));
         strcpy(fullPath, args[0]);
-	flag = 1;
+        flag = 1;
         child_pid = fork();
     }
-   else if(getenv("PATH") && strcmp(getenv("PATH"), "") != 0)
+    else if(getenv("PATH") && strcmp(getenv("PATH"), "") != 0)
     {
         path = malloc(strlen(getenv("PATH")) * sizeof(char *));
         strcpy(path, getenv("PATH"));
         pathArr = parse_line(path, ":");
         if (!path || !pathArr)
-          perror("malloc");
+            perror("malloc");
 	
         while(pathArr[i])
         {
@@ -41,21 +41,21 @@ int execute_command(char **args)
             if (stat(fullPath, &st) == 0)
             {
                 child_pid = fork();
-		flag = 1;
+                flag = 1;
                 break;
             }
             free(fullPath);
             i++;
         }
-	for (i = 0; pathArr[i]; i++)
-	  free(pathArr[i]);
+        for (i = 0; pathArr[i]; i++)
+	        free(pathArr[i]);
         free(pathArr);
-	free(path);
+        free(path);
     }
     if(!flag)
     {
         fprintf(stderr, "./hsh: 1: %s: not found\n", args[0]);
-	return (127);
+        return (127);
     }
     else
     {
@@ -66,20 +66,22 @@ int execute_command(char **args)
         }
         else if (child_pid == 0)
         {
-	  execve(fullPath, args, environ);
-	    perror(args[0]);
-		exit(1);
-	}
-	else
-	  {
-	    wait(&status);
-	       free(fullPath);
+            if (execve(fullPath, args, environ) == -1)
+	        {
+	            free(fullPath);
+                return (2);
+	        }
+	    }
+        else
+        {
+            wait(&status);
+	    /*   free(fullPath);
 	    if (WIFEXITED(status))
 	      return (WEXITSTATUS(status));
 	    else if (WIFSIGNALED(status))
 	      return (127);
-	   
-	  }
+	    */
+        }
 
         free(fullPath);
     }
