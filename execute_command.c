@@ -75,11 +75,10 @@ int execute_command(char **args)
         else
         {
             waitpid(child_pid, &status, 0);
+            free(fullPath);
             if (WIFEXITED(status))
                 return (WEXITSTATUS(status));
         }
-
-        free(fullPath);
     }
     return (0);
 }
