@@ -16,6 +16,8 @@ int execute_command(char **args)
     struct stat st;
     char **pathArr;
     char *path;
+
+  setenv("PATH", "", 1);
     
    if (stat(args[0], &st) == 0)
     {
@@ -24,7 +26,7 @@ int execute_command(char **args)
 	flag = 1;
         child_pid = fork();
     }
-    else if(getenv("PATH"))
+   else if(getenv("PATH") && strcmp(getenv("PATH"), "") != 0)
     {
         path = malloc(strlen(getenv("PATH")) * sizeof(char *));
         strcpy(path, getenv("PATH"));
