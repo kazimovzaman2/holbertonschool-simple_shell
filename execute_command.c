@@ -70,11 +70,18 @@ int execute_command(char **args)
             {
                 free(fullPath);
 		perror("Error");
-                exit(2);
+                exit(1);
             }
         }
         else
-        wait(&status);
+	  {
+	    wait(&status);
+	    free(fullPath);
+	    if (WIFEXITED(status))
+	      return (WEXITSTATUS(status));
+	    else if (WIFSIGNALED(status))
+	      return (127);
+	  }
 
         free(fullPath);
     }
