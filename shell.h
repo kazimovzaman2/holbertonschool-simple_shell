@@ -15,5 +15,6 @@ char *readline(void);
 char **parse_line(char *line, char *delimiter);
 int execute_command(char **args);
 void print_env(void);
+char *find_executable(char **args);
 
 #endif
