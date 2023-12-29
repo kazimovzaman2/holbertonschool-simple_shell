@@ -1,55 +1,112 @@
 #include "shell.h"
 
-/**
- * main - Base functionality of shell.
- *
- * Return: Always 0.
- */
+
+int findpath(char *argument0, char *newpath)
+{
+	char *path = getenv("PATH");
+	char *token = strtok(path, ":");
+
+	while (token != NULL)
+	{
+		snprintf(newpath, 50, "%s/%s", token, argument0);
+		if (access(newpath, X_OK) == 0)
+		{
+			return (0);
+		}
+		token = strtok(NULL, ":");
+	}
+	return (1);
+}
+
+
+
+void runcommand(char *line)
+{
+	pid_t child_pid;
+	int i, status;
+	char *args[10];
+
+	child_pid = fork();
+	if (child_pid == -1)
+	{
+		perror("Fork failed");
+		exit(1);
+	}
+	else if (child_pid == 0)
+    {
+		i = 0;
+		args[i] = strtok(line, " ");
+		while (args[i] != NULL)
+		{
+			i++;
+			args[i] = strtok(NULL, " ");
+		}
+		args[i] = NULL;
+		if (args[0] && !strchr(args[0], '/'))
+		{
+			char newpath[50];
+
+			if (findpath(args[0], newpath) == 0)
+				args[0] = newpath;
+		}
+		execve(args[0], args, environ);
+		perror("./shell");
+		exit(1);
+	}
+	else
+	{
+		wait(&status);
+	}
+}
+
+
+
 int main(void)
 {
-  int i, turn;
-	char *line;
-	char **args;
+	char *line = NULL, **env = environ;
+	size_t line_len = 0;
+	ssize_t line_read;
+	int i;
+    char *ptr;
 
 	while (1)
 	{
-		line = readline();
-		if (!line)
-			break;
-		
-		args = parse_line(line, " \n\t");
-		free(line);
-		if (!args[0])
+		line_read = getline(&line, &line_len, stdin);
+		if (line_read == -1)
 		{
-		  for (i = 0; args[i]; i++)
-                        free(args[i]);
-		  free(args);
-		  continue;
+			free(line);
+			exit(0);
 		}
-		else if (strcmp(args[0], "exit") == 0 && args[1] == NULL)
-		  {
-		    for (i = 0; args[i]; i++)
-			free(args[i]);
-		    free(args);
-		    exit(0);
-		  }
-		else if (strcmp(args[0], "env") == 0)
-		  {
-		    for (i = 0; args[i]; i++)
-			free(args[i]);
-		    free(args);
-		    print_env();
-		    continue;
-		  }
-		turn = execute_command(args);
-
-		for (i = 0; args[i]; i++)
-			free(args[i]);
-		free(args);
+		ptr = line;
+        while (*ptr != '\0')
+        {
+            if (*ptr == '\n')
+            {
+                *ptr = '\0';
+                break;
+            }
+            ptr++;
+        }
+        for (i = 0; line[i] != '\0'; i++)
+		{
+			if (line[i] != ' ')
+				break;
+		}
+		if (line[i] == '\0')
+			continue;
+		if (strcmp(line, "exit") == 0)
+			break;
+		else if (strcmp(line, "env") == 0)
+        {
+			while (*env != NULL)
+			{
+				printf("%s\n", *env);
+				env++;
+			}
+		}
+		else
+			runcommand(line);
 	}
-
 	free(line);
-	if (turn == 127)
-	  exit(127);
 	return (0);
 }
