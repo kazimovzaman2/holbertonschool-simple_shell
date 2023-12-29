@@ -7,9 +7,9 @@
  */
 int main(void)
 {
-  int i, turn;
-	char *line;
-	char **args;
+    int i = 0, turn = 0;
+	char *line = NULL;
+	char **args = NULL;
 
 	while (1)
 	{
@@ -29,7 +29,7 @@ int main(void)
 		else if (strcmp(args[0], "exit") == 0 && args[1] == NULL)
 		{
 		    for (i = 0; args[i]; i++)
-			free(args[i]);
+			    free(args[i]);
 		    free(args);
 		    exit(turn);
 		}

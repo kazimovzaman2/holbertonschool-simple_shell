@@ -11,11 +11,11 @@
 int execute_command(char **args)
 {
     pid_t child_pid;
-    int status, flag = 0, i = 0;
-    char *fullPath;
+    int status = 0, flag = 0, i = 0;
+    char *fullPath = NULL;
     struct stat st;
-    char **pathArr;
-    char *path;
+    char **pathArr = NULL;
+    char *path = NULL;
 
     if (stat(args[0], &st) == 0 && strcmp(args[0], "hbtn_ls") != 0)
     {
@@ -31,7 +31,7 @@ int execute_command(char **args)
         pathArr = parse_line(path, ":");
         if (!path || !pathArr)
             perror("malloc");
-	
+
         while(pathArr[i])
         {
             fullPath = malloc((strlen(pathArr[i]) + strlen(args[0]) + 1) * sizeof(char *));
