@@ -50,13 +50,20 @@ int runcommand(char *line)
 				args[0] = newpath;
 		}
 		execve(args[0], args, environ);
-		perror("./hsh");
+		perror(args[0]);
 		exit(1);
 	}
 	else
 	{
 		wait(&status);
-        return WEXITSTATUS(status);
+        if (WIFEXITED(status))
+        {
+            return (WEXITSTATUS(status));
+        }
+        else if (WIFSIGNALED(status))
+        {
+            return (127);
+        }
 	}
 }
 
