@@ -66,21 +66,19 @@ int execute_command(char **args)
         }
         else if (child_pid == 0)
         {
-	  if (execve(fullPath, args, environ) == -1)
-	    {
-	      free(fullPath);
-              return (2);
-	    }
+	  execve(fullPath, args, environ);
+	    perror(args[0]);
+		exit(1);
 	}
-        else
+	else
 	  {
 	    wait(&status);
-	    /*   free(fullPath);
+	       free(fullPath);
 	    if (WIFEXITED(status))
 	      return (WEXITSTATUS(status));
 	    else if (WIFSIGNALED(status))
 	      return (127);
-	    */
+	   
 	  }
 
         free(fullPath);
