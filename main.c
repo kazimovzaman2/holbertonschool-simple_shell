@@ -50,7 +50,7 @@ void runcommand(char *line)
 				args[0] = newpath;
 		}
 		execve(args[0], args, environ);
-		perror("./shell");
+		perror("./hsh");
 		exit(1);
 	}
 	else
