@@ -21,23 +21,29 @@ int main(void)
 		free(line);
 		if (!args[0])
 		{
+		  for (i = 0; args[i]; i++)
+                        free(args[i]);
 			free(args);
 			continue;
 		}
 		else if (strcmp(args[0], "exit") == 0 && args[1] == NULL)
 		  {
+		    for (i = 0; args[i]; i++)
+                        free(args[i]);
 		    free(args);
 		    exit(0);
 		  }
 		else if (strcmp(args[0], "env") == 0)
 		  {
+		    for (i = 0; args[i]; i++)
+                        free(args[i]);
 		    free(args);
 		    print_env();
 		    continue;
 		  }
 		execute_command(args);
 
-		for (i = 0; args[i] != NULL; i++)
+		for (i = 0; args[i]; i++)
 			free(args[i]);
 		free(args);
 	}
