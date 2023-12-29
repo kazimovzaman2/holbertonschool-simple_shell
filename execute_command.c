@@ -70,7 +70,7 @@ int execute_command(char **args)
             {
                 free(fullPath);
 		perror("Error");
-                exit(EXIT_FAILURE);
+                exit(2);
             }
         }
         else
