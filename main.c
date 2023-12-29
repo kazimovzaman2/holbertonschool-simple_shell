@@ -16,12 +16,7 @@ int main(void)
 		line = readline();
 		if (!line)
 			break;
-		if (strcmp(line, "exit") == 0)
-		{
-			free(line);
-			break;
-		}
-
+		
 		args = parse_line(line, " \n\t");
 		free(line);
 		if (!args[0])
@@ -29,6 +24,17 @@ int main(void)
 			free(args);
 			continue;
 		}
+		else if (strcmp(args[0], "exit") == 0 && args[1] == NULL)
+		  {
+		    free(args);
+		    exit(0);
+		  }
+		else if (strcmp(args[0], "env") == 0)
+		  {
+		    free(args);
+		    print_env();
+		    continue;
+		  }
 		execute_command(args);
 
 		for (i = 0; args[i] != NULL; i++)
