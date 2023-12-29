@@ -8,7 +8,7 @@
  *
  * Return: No return value.
  */
-void execute_command(char **args)
+int execute_command(char **args)
 {
   pid_t child_pid;
   int status, flag = 0, i = 0;
@@ -31,7 +31,6 @@ void execute_command(char **args)
         pathArr = parse_line(path, ":");
         if (!path || !pathArr)
           perror("malloc");
-        free(path);
 	
         while(pathArr[i])
         {
@@ -49,13 +48,14 @@ void execute_command(char **args)
             i++;
         }
 	for (i = 0; pathArr[i]; i++)
-        free(pathArr[i]);
+	  free(pathArr[i]);
         free(pathArr);
+	free(path);
     }
     if(!flag)
     {
         fprintf(stderr, "./hsh: 1: %s: not found\n", args[0]);
-	exit(127);
+	return (127);
     }
     else
     {
@@ -78,4 +78,5 @@ void execute_command(char **args)
 
         free(fullPath);
     }
+    return (0);
 }

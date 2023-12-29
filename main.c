@@ -7,7 +7,7 @@
  */
 int main(void)
 {
-	int i;
+  int i, turn;
 	char *line;
 	char **args;
 
@@ -41,7 +41,7 @@ int main(void)
 		    print_env();
 		    continue;
 		  }
-		execute_command(args);
+		turn = execute_command(args);
 
 		for (i = 0; args[i]; i++)
 			free(args[i]);
@@ -49,5 +49,7 @@ int main(void)
 	}
 
 	free(line);
+	if (turn == 127)
+	  exit(127);
 	return (0);
 }
