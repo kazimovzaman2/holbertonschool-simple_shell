@@ -17,8 +17,6 @@ int execute_command(char **args)
     char **pathArr;
     char *path;
 
-  setenv("PATH", "", 1);
-    
    if (stat(args[0], &st) == 0)
     {
         fullPath = malloc(strlen(args[0]) * sizeof(char *));
