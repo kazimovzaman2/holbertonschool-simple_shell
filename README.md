@@ -27,3 +27,6 @@ gcc -o hsh *.c
 
 - Reads user input from the command line.
 - Parses commands and arguments using strtok.
+- Executes commands using fork, execve, and waitpid.
+- Handles errors with appropriate messages.
+- Searches for executables in the PATH environment variable.
