@@ -30,3 +30,8 @@ gcc -o hsh *.c
 - Executes commands using fork, execve, and waitpid.
 - Handles errors with appropriate messages.
 - Searches for executables in the PATH environment variable.
+
+## Contributors
+
+- Kamal Huseynli
+- Zaman Kazimov
