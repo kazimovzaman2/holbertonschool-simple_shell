@@ -10,6 +10,5 @@
  */
 int execute_command(char **args)
 {
-	
 	return (0);
 }
