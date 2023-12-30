@@ -1,0 +1,18 @@
+.TH simple_shell 1 "December 2023" "Simple Shell Manual"
+
+.SH NAME
+simple_shell \- A simple Unix-like shell
+
+.SH SYNOPSIS
+.B simple_shell
+
+.SH DESCRIPTION
+.NP
+The
+.B simple_shell
+is a minimalistic shell implementation designed for basic command-line operations.
+
+.SH OPTIONS
+The
+.B simple_shell
+does not have any command-line options.
