@@ -38,3 +38,56 @@ gcc -o hsh *.c
 ./hsh
 
 3. Enter commands and press Enter to execute them.
+
+.SH EXAMPLES
+.PP
+Example 1: Run a command
+.B
+$ ./hsh
+$ ls
+
+Example 2: Exit the shell
+.B
+$ ./hsh
+$ exit
+
+.SH RETURN VALUES
+.PP
+The shell returns the following exit values:
+
+- 0: Successful execution.
+- 1: Error during execution.
+- 127: Command not found.
+
+.SH AUTHORS
+.PP
+- Kamal Huseynli
+- Zaman Kazimov
+
+.SH HOLBERTON SCHOOL COHORT
+.PP
+BAK-1023
+
+.SH SEE ALSO
+.PP
+The full source code and documentation for the simple shell can be found at: https://github.com/yourusername/simple_shell
+
+.SH BUGS
+.PP
+Report any bugs to the GitHub repository issue tracker.
+
+.SH COPYRIGHT
+.PP
+This is free and unencumbered software released into the public domain.
+
+.SH NOTES
+.PP
+This manual page was written by [Your Name] <your.email@example.com>.
+
+.SH VERSION
+.PP
+1.0
+
+.SH DATE
+.PP
+December 2023
