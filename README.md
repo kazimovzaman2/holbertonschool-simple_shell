@@ -16,3 +16,8 @@ This project is a minimalistic shell implementation designed to demonstrate fund
 ```bash
 gcc -o hsh *.c
 ```
+2. Run the shell:
+```bash
+./hsh
+```
+3. Type commands as you would in a standard Unix shell.
