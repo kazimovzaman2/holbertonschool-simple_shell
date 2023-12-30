@@ -21,3 +21,9 @@ gcc -o hsh *.c
 ./hsh
 ```
 3. Type commands as you would in a standard Unix shell.
+
+
+## Implemented Features
+
+- Reads user input from the command line.
+- Parses commands and arguments using strtok.
