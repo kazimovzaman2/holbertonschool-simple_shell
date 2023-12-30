@@ -35,3 +35,8 @@ gcc -o hsh *.c
 
 - Kamal Huseynli
 - Zaman Kazimov
+
+## License
+
+Feel free to customize the README according to the specific details of your project and the preferences of your audience.
+
