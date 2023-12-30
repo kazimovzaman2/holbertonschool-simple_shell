@@ -33,8 +33,8 @@ gcc -o hsh *.c
 
 ## Contributors
 
-- Kamal Huseynli
-- Zaman Kazimov
+- [Kamal Huseynli](https://github.com/Kamalusta)
+- [Zaman Kazimov](https://github.com/kazimovzaman2)
 
 ## License
 
