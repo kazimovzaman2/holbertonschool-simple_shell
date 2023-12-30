@@ -20,8 +20,7 @@ int execute_command(char **args)
 		fullPath = malloc(strlen(args[0]) * sizeof(char *));
 		strcpy(fullPath, args[0]);
 		flag = 1;
-		child_pid = fork();
-	}
+		child_pid = fork(); }
 	else if (getenv("PATH") && strcmp(getenv("PATH"), "") != 0)
 	{
 		path = malloc(strlen(getenv("PATH")) * sizeof(char *));
@@ -29,10 +28,10 @@ int execute_command(char **args)
 		pathArr = parse_line(path, ":");
 		if (!path || !pathArr)
 			perror("malloc");
-
 		while (pathArr[i])
 		{
-			fullPath = malloc((strlen(pathArr[i]) + strlen(args[0]) + 1) * sizeof(char *));
+			fullPath = malloc((strlen(pathArr[i]) + strlen(args[0]) + 1)
+					* sizeof(char *));
 			strcpy(fullPath, pathArr[i]);
 			strcat(fullPath, "/");
 			strcat(fullPath, args[0]);
@@ -40,11 +39,9 @@ int execute_command(char **args)
 			{
 				child_pid = fork();
 				flag = 1;
-				break;
-			}
+				break; }
 			free(fullPath);
-			i++;
-		}
+			i++; }
 		for (i = 0; pathArr[i]; i++)
 			free(pathArr[i]);
 		free(pathArr);
@@ -60,23 +57,20 @@ int execute_command(char **args)
 		if (child_pid == -1)
 		{
 			free(fullPath);
-			perror("fork");
-		}
+			perror("fork"); }
 		else if (child_pid == 0)
 		{
 			if (execve(fullPath, args, environ) == -1)
 			{
 				free(fullPath);
-				return (2);
-			}
+				return (2); }
 		}
 		else
 		{
 			waitpid(child_pid, &status, 0);
 			free(fullPath);
 			if (WIFEXITED(status))
-				return (WEXITSTATUS(status));
-		}
+				return (WEXITSTATUS(status)); }
 	}
 	return (0);
 }
