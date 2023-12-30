@@ -16,3 +16,25 @@ is a minimalistic shell implementation designed for basic command-line operation
 The
 .B simple_shell
 does not have any command-line options.
+
+.SH COMMANDS
+.NP
+The following commands are supported:
+
+- \fBexit\fP: Exits the shell.
+- \fBenv\fP: Prints the current environment variables.
+- Any other executable located in the system's PATH or specified with a full path.
+
+.SH USAGE
+.PP
+To use the shell, follow these steps:
+
+1. Compile the code using a C compiler like GCC:
+.B
+gcc -o hsh *.c
+
+2. Run the shell:
+.B
+./hsh
+
+3. Enter commands and press Enter to execute them.
