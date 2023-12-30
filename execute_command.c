@@ -11,11 +11,9 @@
 int execute_command(char **args)
 {
     pid_t child_pid;
-    int status = 0, flag = 0, i = 0;
-    char *fullPath = NULL;
     struct stat st;
-    char **pathArr = NULL;
-    char *path = NULL;
+    int status = 0, flag = 0, i = 0;
+    char *fullPath = NULL, **pathArr = NULL, *path = NULL;
 
     if (stat(args[0], &st) == 0 && strcmp(args[0], "hbtn_ls") != 0)
     {
